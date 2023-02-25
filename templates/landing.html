@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prediction</title>
+    <link href="https://fonts.googleapis.com/css?family=Archivo&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="blue-box">
+            <div class="bar">
+                <div class="logo">
+                    <span class="logo-name">Growth</span>
+                    <div class="logo-pic"></div>
+                </div>
+                <div class="links">
+                    <a class="a-link" href="{% url 'predictlaptop' %}">Calculate</a>
+                    <a class="a-link" href="form1.html">About us</a>
+                </div>
+            </div>
+            <div class="intro">
+                <div class="heading1">
+                    <h1>Web application for forecasting<br>the cost of computer equipment</h1>
+                </div>
+                <div class="heading2">
+                    The web application will predict the price based on your descriptions <br>
+                    of the current state of your computer equipment
+                </div>
+                <a href="{% url 'predictlaptop' %}"><button class="try-button">Let's try it!</button></a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .wrapper {
+        width: 100%;
+        height: auto;
+        background: rgba(217, 217, 217, 1);
+        position: absolute;
+    }
+
+    .blue-box {
+        width: 100%;
+        height: 770px;
+        background: rgba(218, 244, 254, 1);
+        position: relative;
+        padding-top: 30px;
+
+    }
+
+    .bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 76%;
+        height: 35px;
+        margin-left: 10%;
+
+    }
+
+    .logo {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .logo-name {
+        font-size: 28px;
+        font-family: 'Poppins';
+        color: #131316;
+        font-weight: 600;
+        line-height: 35px;
+    }
+
+    .logo-pic {
+        width: 6.24px;
+        height: 0. 88px;
+        border: 3px solid #4891FF;
+        background-color: #4891FF;
+        border-radius: 6px;
+        transform: rotate(55.3deg);
+        margin-bottom: 20px;
+    }
+
+    .links {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        line-height: 35px;  
+    }
+
+    .a-link{
+        text-decoration: none;
+        font-family: 'Poppins';
+        font-size: 16px;
+        color: #131316;
+    }
+    .intro {
+        margin-top: 120px;
+        margin-left: 10%;
+    }
+
+    h1 {
+        font-size: 60px;
+        font-family: 'Poppins';
+        color: #131316;
+    }
+
+    .heading2 {
+        margin-top: 40px;
+        font-size: 20px;
+        font-family: 'Poppins';
+        color: #131316;
+    }
+
+    .try-button {
+        width: 10%;
+        height: 60px;
+        background: #4891FF;
+        border: none;
+        border-radius: 16px;
+        font-size: 18px;
+        font-family: 'Popppins';
+        color: aliceblue;
+        margin-top: 20px;
+    }
+
+
+    button:hover {
+        background: rgba(218, 244, 254, 1);
+        color: #4891FF;
+        box-shadow: inset 0 0 0 2px #4891FF;
+    }
+</style>

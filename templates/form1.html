@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prediction</title>
+    <link href="https://fonts.googleapis.com/css?family=Archivo&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="black-box">
+            <span class="heading1">Enter Data</span>
+            <span class="heading2">Enter data about your laptop</span>
+        </div>
+        <div class="white-box">
+
+            {% if predict %}
+            <div class="price">
+                Yout Laptop price: {{predict}} ₸
+            </div>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                <label for="brand">Brand</label><br>
+                <input type="text" id="brand" name="brand" placeholder="Enter brand name.."><br>
+                <label for="ram">RAM</label><br>
+                <input type="text" id="ram" name="ram" placeholder="Enter RAM size.."><br>
+                <label for="display">Display</label><br>
+                <input type="text" id="display" name="display" placeholder="Enter display size.."><br>
+                <label for="ssd">SSD</label><br>
+                <input type="text" id="ssd" name="ssd" placeholder="Enter SSD size.."><br>
+                <label for="status">Status</label><br>
+
+                <select id="selectStatus" aria-label="Default select example" name="status">
+                    <option class="option" value="Новый">New</option>
+                    <option class="option" value="Б/у">Used</option>
+                </select>
+                
+                <br>
+                <button type="submit">Calculate</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .wrapper {
+        width: 100%;
+        height: auto;
+        background: rgba(217, 217, 217, 1);
+        position: absolute;
+    }
+
+    .black-box {
+        width: 100%;
+        height: 370px;
+        background: rgba(18, 18, 20, 1);
+        position: relative;
+    }
+
+    .heading1 {
+        width: 245px;
+        color: rgba(255, 255, 255, 1);
+        position: relative;
+        top: 110px;
+        left: 25%;
+        font-family: Archivo;
+        font-weight: Bold;
+        font-size: 32px;
+        opacity: 1;
+        text-align: left;
+    }
+
+    .heading2 {
+        width: 232px;
+        color: rgba(66, 211, 255, 1);
+        position: absolute;
+        top: 188px;
+        left: 25%;
+        font-family: Poppins;
+        font-weight: Regular;
+        font-size: 16px;
+        opacity: 1;
+        text-align: left;
+    }
+
+    .white-box {
+        width: 50%;
+        height: auto;
+        background: rgba(250, 250, 252, 1);
+        padding: 64px 64px;
+        opacity: 1;
+        margin-bottom: 100px;
+        position: absolute;
+        top: 220px;
+        left: 25%;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .price {
+        width: 100%;
+        height: 50px;
+        border-radius: 8px;
+        background: #FAFAFC;
+        color:#131316;
+        border: 1px solid #131316;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        padding-left: 15px;
+        margin-bottom: 15px;
+        padding-top: 14px;
+    }
+    form{
+        width: auto;
+        height: auto;
+    }
+    input {
+        width: 100%;
+        height: 50px;
+        border-radius: 8px;
+        background: #FAFAFC;
+        border: 1px solid #E6E6F0;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        padding-left: 15px;
+        margin-bottom: 15px;
+        margin-top:5px;
+    }
+    label {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        opacity: 0.9x;
+    }
+    select {
+        width: 100%;
+        height: 50px;
+        border-radius: 8px;
+        background: #FAFAFC;
+        border: 1px solid #E6E6F0;
+        margin-bottom: 50px;
+        margin-top:5px;
+    }
+    
+    select#selectStatus {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        padding-left: 15px;
+    }
+    button {
+        width: 40%;
+        height: 50px;
+        border-radius: 8px;
+        background: #FAFAFC;
+        border: 1px solid rgba(66, 211, 255, 1);
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        padding-left: 10px;
+        margin-bottom: 15px;
+        margin-left: 30%;
+    }
+</style>
