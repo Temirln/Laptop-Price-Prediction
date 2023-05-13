@@ -1,49 +1,26 @@
 from django.shortcuts import render
 
 
-import math
 
-from tqdm import tqdm,trange
+# from tqdm import tqdm,trange
 import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
-import seaborn as sns
-from sklearn.model_selection import train_test_split
+
 
 #KNN
-from sklearn.neighbors import KNeighborsRegressor,KNeighborsClassifier
 
 #Linear regression
-from sklearn.linear_model import LinearRegression
 
 #Random Forest
-from sklearn.ensemble import RandomForestRegressor
-from sklearn import metrics
-from sklearn.model_selection import train_test_split
 
 # from sklearn.model_selection import StratifiedKFold
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import f1_score
 
-from sklearn.preprocessing import StandardScaler
 # from math import sqrt
 import random
-from sklearn.metrics import mean_squared_error, r2_score
 # import numpy as np
 random.seed(0)
 
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
 from sklearn import preprocessing
-from sklearn.preprocessing import OneHotEncoder, LabelEncoder
-from sklearn.metrics import r2_score,mean_absolute_error
 
-from sklearn.linear_model import LinearRegression,Ridge,Lasso
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import RandomForestRegressor,GradientBoostingRegressor,AdaBoostRegressor,ExtraTreesRegressor
-from sklearn.svm import SVR
-from xgboost import XGBRegressor
 
 # Create your views here.
 
