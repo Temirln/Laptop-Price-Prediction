@@ -8,8 +8,10 @@
       },
       {
         "src": "build_files.sh",
-        "use": "@vercel/versel build"
-        
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "staticfiles_build"
+        }
       }
     ],
     "routes": [
