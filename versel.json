@@ -8,14 +8,24 @@
       },
       {
         "src": "build_files.sh",
+<<<<<<< HEAD
         "use": "@vercel/static-build"
         // "config": {
         //   "distDir": "staticfiles_build"
         // }
+=======
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "staticfiles_build"
+        }
+>>>>>>> parent of e2bc563 (test)
       }
     ],
     "routes": [
-
+      {
+        "src": "/static/(.*)",
+        "dest": "/static/$1"
+      },
       {
         "src": "/(.*)",
         "dest": "rmt/wsgi.py"
