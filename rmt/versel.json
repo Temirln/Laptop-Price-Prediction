@@ -2,7 +2,7 @@
     "version":1,
     "builds":[
         {
-            "src":"rmt/wsgu.py",
+            "src":"rmt/wsgi.py",
             "use":"@versel/python",
             "config":{"maxLambdaSize":"15Mb","runtime":"python3.9"}
         },
