@@ -1,6 +1,7 @@
 echo "Build Start Temirlan"
 # build_files.sh
-python3.9 -m pip install -r requirements.txt
+pip install -r requirements.txt
 # python3.9 manage.py collectstatic --noinput --clear
+python3.9 manage.py runserver
 
 echo "Build End Temirlan"
