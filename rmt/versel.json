@@ -1,0 +1,28 @@
+{
+    "version":1,
+    "builds":[
+        {
+            "src":"rmt/wsgu.py",
+            "use":"@versel/python",
+            "config":{"maxLambdaSize":"15Mb","runtime":"python3.9"}
+        },
+        {
+            "src":"build_files.sh",
+            "use":"@versel/static-build",
+            "config":{
+                "distDir":"static_files_build"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src":"/static/(.*)",
+            "dest":"/static/$1"
+        },
+        {
+            "src":"/(.*)",
+            "dest":"rmt/wsgi.py"
+        }
+    ]
+
+}

@@ -53,6 +53,7 @@ def index(request):
 def predict(request):
     context={
         'values': request.POST,
+
     }
 
     if request.method == "POST":
@@ -87,24 +88,31 @@ def predict(request):
 
 def predict_only_new(request):
 
+    excel_file = r'D:\IDE Projects\VS Code Projects\Laptop Price Prediction\rmt\files\df_only_new.xlsx'
+    df = pd.read_excel(excel_file)
+    processors_list = df['microprocessors'].unique().tolist()
+    processors_list.sort()
+
     context={
         'values': request.POST,
     }
+    
+    context['processors_list'] = processors_list
 
     if request.method == "POST":
         ssd = request.POST['ssd']
         ram = request.POST['ram']
         display = request.POST['display'] 
         microprocessors = request.POST['microprocessors'].upper()
+
+        print(microprocessors)
         brand = request.POST['brand'].upper()
 
-        excel_file = r'D:\IDE Projects\VS Code Projects\Laptop Price Prediction\rmt\files\df_only_new.xlsx'
-        df = pd.read_excel(excel_file)
         
         label_encoder = preprocessing.LabelEncoder()
         p_brand = df['brand']
         p_microprocessors = df['microprocessors']
-
+        
         df['brand'] = label_encoder.fit_transform(df['brand'])
         df['microprocessors'] = label_encoder.fit_transform(df['microprocessors'])
 
@@ -115,8 +123,12 @@ def predict_only_new(request):
         model = pd.read_pickle(r"D:\IDE Projects\VS Code Projects\Laptop Price Prediction\rmt\files\random_only_new.pickle")
 
 
+        # processors_list = dict(zip(list(p_microprocessors.unique()),df['microprocessors'].unique().tolist()))
         result = model.predict([[brand_v[brand],display,ssd,ram,microprocessors_v[microprocessors]]])
 
         context['predict'] = int(result[0])
+        
+        # print(microprocessors_v)
+        # print(processors_list)
 
     return render(request,"form1 only_new.html",context) 

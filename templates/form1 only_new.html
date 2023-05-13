@@ -38,13 +38,15 @@
                 <input type="text" id="ssd" name="ssd" placeholder="Enter SSD size.."><br>
                 
                 <label for="status">Microprocessor</label><br>
-                <input type="text" id="microprocessors" name="microprocessors" placeholder="Enter Microprocessor"><br>
+                <!-- <input type="text" id="microprocessors" name="microprocessors" placeholder="Enter Microprocessor"><br> -->
 
-                <!-- <select id="selectStatus" aria-label="Default select example" name="status">
-                    <option class="option" value="Новый">New</option>
-                    <option class="option" value="Б/у">Used</option>
+                <select id="microprocessors" aria-label="Default select example" name="microprocessors">
+                    <option class="option">Выберите Процессор</option>
+                    {% for p in processors_list %}
+                        <option class="option" value="{{p}}">{{p}}</option>
+                    {% endfor %}
                 </select>
-                 -->
+                
                 <br>
                 <button type="submit">Calculate</button>
             </form>
