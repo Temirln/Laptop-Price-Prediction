@@ -1,6 +1,6 @@
 import os
 
-from rmt.settings import BASE_DIR
+from backend.settings import BASE_DIR
 
 def get_full_path(path):
     dirname = os.path.dirname(__file__)
