@@ -63,7 +63,17 @@ CORS_ORIGIN_WHITELIST = (
   'http://localhost:5173',
 )
 
+CORS_ALLOWED_ORIGINS = [
+    "ttps://laptop-prediction.up.railway.app",
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173"
+]
+
 CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'backend.urls'
 
