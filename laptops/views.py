@@ -16,6 +16,8 @@ import pandas as pd
 
 # from math import sqrt
 import random
+
+from utils.utils_file_path import get_full_path
 # import numpy as np
 random.seed(0)
 
@@ -40,8 +42,8 @@ def predict(request):
         status = request.POST['status']
         brand = request.POST['brand'].upper()
 
-        excel_file = r'D:\IDE Projects\VS Code Projects\Laptop Price Prediction\rmt\files\df.xlsx'
-        df = pd.read_excel(excel_file)
+        excel_file = r'files\df.xlsx'
+        df = pd.read_excel(get_full_path(excel_file))
         
         label_encoder = preprocessing.LabelEncoder()
         p_brand = df['brand']
@@ -54,7 +56,7 @@ def predict(request):
         status_v = dict(zip(list(p_status),df['status'].to_list()))
 
         # model = pd.read_pickle(r"C:\Users\Lenovo\Jupeter\RMT\marketplaces_parsing\Endterm\random.pickle")
-        model = pd.read_pickle(r"D:\IDE Projects\VS Code Projects\Laptop Price Prediction\rmt\files\random_full_dataset.pickle")
+        model = pd.read_pickle(get_full_path(r"files\random_full_dataset.pickle"))
 
 
         result = model.predict([[brand_v[brand],display,ssd,ram,status_v[status]]])
@@ -65,8 +67,8 @@ def predict(request):
 
 def predict_only_new(request):
 
-    excel_file = r'D:\IDE Projects\VS Code Projects\Laptop Price Prediction\rmt\files\df_only_new.xlsx'
-    df = pd.read_excel(excel_file)
+    excel_file = r'files\df_only_new.xlsx'
+    df = pd.read_excel(get_full_path(excel_file))
     processors_list = df['microprocessors'].unique().tolist()
     processors_list.sort()
 
@@ -97,7 +99,9 @@ def predict_only_new(request):
         microprocessors_v = dict(zip(list(p_microprocessors),df['microprocessors'].to_list()))
 
         # model = pd.read_pickle(r"C:\Users\Lenovo\Jupeter\RMT\marketplaces_parsing\Endterm\random.pickle")
-        model = pd.read_pickle(r"D:\IDE Projects\VS Code Projects\Laptop Price Prediction\rmt\files\random_only_new.pickle")
+        model = pd.read_pickle(get_full_path(r"files\random_only_new.pickle"))
+
+        model = pd.read_pickle(get_full_path(r"files\random_only_new.pickle"))
 
 
         # processors_list = dict(zip(list(p_microprocessors.unique()),df['microprocessors'].unique().tolist()))
