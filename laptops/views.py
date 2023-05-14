@@ -41,7 +41,7 @@ class LaptopAPIView(APIView):
         status = request.data['status']
         brand = request.data['brand'].upper()
 
-        excel_file = r'files\df.xlsx'
+        excel_file = 'files/df.xlsx'
         df = pd.read_excel(get_full_path(excel_file))
         
         label_encoder = preprocessing.LabelEncoder()
@@ -55,7 +55,7 @@ class LaptopAPIView(APIView):
         status_v = dict(zip(list(p_status),df['status'].to_list()))
 
         # model = pd.read_pickle(r"C:\Users\Lenovo\Jupeter\RMT\marketplaces_parsing\Endterm\random.pickle")
-        model = pd.read_pickle(get_full_path(r"files\random_full_dataset.pickle"))
+        model = pd.read_pickle(get_full_path("files/random_full_dataset.pickle"))
 
 
         result = model.predict([[brand_v[brand],display,ssd,ram,status_v[status]]])
