@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-pn6q5-p55==dvpvylimc$0@^m!8sj86b*-h#1xhx8_^y^#@2lw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1",".versel.app",".now.sh"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'rmt.wsgi.app'
+WSGI_APPLICATION = 'rmt.wsgi.application'
 
 
 # Database
@@ -131,4 +131,4 @@ import os
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles', 'static')
