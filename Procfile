@@ -1,1 +1,1 @@
-web: gunicorn rmt.wsgi --log-file -
+web: gunicor backend.wsgi --log-file -
