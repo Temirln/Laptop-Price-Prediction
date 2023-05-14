@@ -17,14 +17,50 @@ import pandas as pd
 # from math import sqrt
 import random
 
+
 from utils.utils_file_path import get_full_path
 # import numpy as np
 random.seed(0)
 
 from sklearn import preprocessing
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 # Create your views here.
+
+class LaptopAPIView(APIView):
+
+    def get(self,request):
+        return Response({"price":'100000'})
+
+    def post(self,request):
+        ssd = request.data['ssd']
+        ram = request.data['ram']
+        display = request.data['display'] 
+        status = request.data['status']
+        brand = request.data['brand'].upper()
+
+        excel_file = r'files\df.xlsx'
+        df = pd.read_excel(get_full_path(excel_file))
+        
+        label_encoder = preprocessing.LabelEncoder()
+        p_brand = df['brand']
+        p_status = df['status']
+
+        df['brand'] = label_encoder.fit_transform(df['brand'])
+        df['status'] = label_encoder.fit_transform(df['status'])
+
+        brand_v = dict(zip(list(p_brand),df['brand'].to_list()))
+        status_v = dict(zip(list(p_status),df['status'].to_list()))
+
+        # model = pd.read_pickle(r"C:\Users\Lenovo\Jupeter\RMT\marketplaces_parsing\Endterm\random.pickle")
+        model = pd.read_pickle(get_full_path(r"files\random_full_dataset.pickle"))
+
+
+        result = model.predict([[brand_v[brand],display,ssd,ram,status_v[status]]])
+
+        return Response({'laptop_price':int(result[0])})
 
 def index(request):
     return render(request,'landing.html')
