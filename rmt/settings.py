@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-pn6q5-p55==dvpvylimc$0@^m!8sj86b*-h#1xhx8_^y^#@2lw
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
+CSRF_TRUSTED_ORIGINS = ['https://laptop-prediction.up.railway.app']
 
 # Application definition
 
