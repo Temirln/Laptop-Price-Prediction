@@ -42,7 +42,7 @@ def predict(request):
         status = request.POST['status']
         brand = request.POST['brand'].upper()
 
-        excel_file = r'files\df.xlsx'
+        excel_file = 'files/df.xlsx'
         df = pd.read_excel(get_full_path(excel_file))
         
         label_encoder = preprocessing.LabelEncoder()
@@ -56,7 +56,7 @@ def predict(request):
         status_v = dict(zip(list(p_status),df['status'].to_list()))
 
         # model = pd.read_pickle(r"C:\Users\Lenovo\Jupeter\RMT\marketplaces_parsing\Endterm\random.pickle")
-        model = pd.read_pickle(get_full_path(r"files\random_full_dataset.pickle"))
+        model = pd.read_pickle(get_full_path("files/random_full_dataset.pickle"))
 
 
         result = model.predict([[brand_v[brand],display,ssd,ram,status_v[status]]])
@@ -67,7 +67,7 @@ def predict(request):
 
 def predict_only_new(request):
 
-    excel_file = r'files\df_only_new.xlsx'
+    excel_file = 'files/df_only_new.xlsx'
     df = pd.read_excel(get_full_path(excel_file))
     processors_list = df['microprocessors'].unique().tolist()
     processors_list.sort()
@@ -99,9 +99,9 @@ def predict_only_new(request):
         microprocessors_v = dict(zip(list(p_microprocessors),df['microprocessors'].to_list()))
 
         # model = pd.read_pickle(r"C:\Users\Lenovo\Jupeter\RMT\marketplaces_parsing\Endterm\random.pickle")
-        model = pd.read_pickle(get_full_path(r"files\random_only_new.pickle"))
+        model = pd.read_pickle(get_full_path("files/random_only_new.pickle"))
 
-        model = pd.read_pickle(get_full_path(r"files\random_only_new.pickle"))
+        model = pd.read_pickle(get_full_path("files/random_only_new.pickle"))
 
 
         # processors_list = dict(zip(list(p_microprocessors.unique()),df['microprocessors'].unique().tolist()))
