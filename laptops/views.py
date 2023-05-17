@@ -47,7 +47,7 @@ class LaptopAPIView(APIView):
         
         label_encoder = preprocessing.LabelEncoder()
         p_brand = df['brand']
-        p_status = df['status']
+        # p_status = df['status']
         p_status = df['full_processor_model']
 
         df['brand'] = label_encoder.fit_transform(df['brand'])
@@ -79,7 +79,7 @@ def predict(request):
         ssd = request.POST['ssd']
         ram = request.POST['ram']
         display = request.POST['display'] 
-        status = request.POST['status']
+        # status = request.POST['status']
         brand = request.POST['brand'].upper()
 
         excel_file = 'files/df.xlsx'
