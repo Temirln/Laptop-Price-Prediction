@@ -39,7 +39,7 @@ class LaptopAPIView(APIView):
         ram = request.data['ram']
         display = request.data['display'] 
         # status = request.data['status']
-        processor = request.data['processor']
+        processor = request.data['processor'].upper()
         brand = request.data['brand'].upper()
 
         excel_file = 'files/marketplaces_clean.xlsx'
