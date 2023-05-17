@@ -38,27 +38,31 @@ class LaptopAPIView(APIView):
         ssd = request.data['ssd']
         ram = request.data['ram']
         display = request.data['display'] 
-        status = request.data['status']
+        # status = request.data['status']
+        processor = request.data['processor']
         brand = request.data['brand'].upper()
 
-        excel_file = 'files/df.xlsx'
+        excel_file = 'files/marketplaces.xlsx'
         df = pd.read_excel(get_full_path(excel_file))
         
         label_encoder = preprocessing.LabelEncoder()
         p_brand = df['brand']
         p_status = df['status']
+        p_status = df['full_processor_model']
 
         df['brand'] = label_encoder.fit_transform(df['brand'])
-        df['status'] = label_encoder.fit_transform(df['status'])
+        # df['status'] = label_encoder.fit_transform(df['status'])
+        df['full_processor_model'] = label_encoder.fit_transform(df['full_processor_model'])
 
         brand_v = dict(zip(list(p_brand),df['brand'].to_list()))
-        status_v = dict(zip(list(p_status),df['status'].to_list()))
+        # status_v = dict(zip(list(p_status),df['status'].to_list()))
+        processor_v = dict(zip(list(p_status),df['full_processor_model'].to_list()))
 
         # model = pd.read_pickle(r"C:\Users\Lenovo\Jupeter\RMT\marketplaces_parsing\Endterm\random.pickle")
         model = pd.read_pickle(get_full_path("files/random_full_dataset.pickle"))
 
 
-        result = model.predict([[brand_v[brand],display,ssd,ram,status_v[status]]])
+        result = model.predict([[brand_v[brand],display,ssd,ram,processor_v[processor]]])
 
         return Response({'laptop_price':int(result[0])})
 
