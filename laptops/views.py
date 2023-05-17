@@ -42,7 +42,7 @@ class LaptopAPIView(APIView):
         processor = request.data['processor']
         brand = request.data['brand'].upper()
 
-        excel_file = 'files/marketplaces.xlsx'
+        excel_file = 'files/marketplaces_clean.xlsx'
         df = pd.read_excel(get_full_path(excel_file))
         
         label_encoder = preprocessing.LabelEncoder()
