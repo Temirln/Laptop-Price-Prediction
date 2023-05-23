@@ -34,36 +34,35 @@ class LaptopAPIView(APIView):
     def get(self,request):
         return Response({"price":'100000'})
 
+    # POST request for API 
     def post(self,request):
+        
+        # Getting data for each parameter 
         ssd = request.data['ssd']
         ram = request.data['ram']
-        display = request.data['display'] 
-        # status = request.data['status']
+        display = request.data['display']
         processor = request.data['processor'].upper()
         brand = request.data['brand'].upper()
 
+        # Excel file with all dataset values
         excel_file = 'files/marketplaces_clean.xlsx'
         df = pd.read_excel(get_full_path(excel_file))
         
+        # We used label encoder for transforming our string values into integer
         label_encoder = preprocessing.LabelEncoder()
         p_brand = df['brand']
-        # p_status = df['status']
         p_status = df['full_processor_model']
-
         df['brand'] = label_encoder.fit_transform(df['brand'])
-        # df['status'] = label_encoder.fit_transform(df['status'])
         df['full_processor_model'] = label_encoder.fit_transform(df['full_processor_model'])
 
         brand_v = dict(zip(list(p_brand),df['brand'].to_list()))
-        # status_v = dict(zip(list(p_status),df['status'].to_list()))
         processor_v = dict(zip(list(p_status),df['full_processor_model'].to_list()))
 
-        # model = pd.read_pickle(r"C:\Users\Lenovo\Jupeter\RMT\marketplaces_parsing\Endterm\random.pickle")
+        # Taking our values and give to the trained model in pickle format, then getting the result laptop price.
         model = pd.read_pickle(get_full_path("files/random_full_dataset.pickle"))
-
-
         result = model.predict([[brand_v[brand],display,ssd,ram,processor_v[processor]]])
 
+        # And finally give result as response
         return Response({'laptop_price':int(result[0])})
 
 def index(request):
