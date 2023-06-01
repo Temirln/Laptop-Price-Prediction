@@ -41,8 +41,16 @@ class LaptopAPIView(APIView):
         ssd = request.data['ssd']
         ram = request.data['ram']
         display = request.data['display']
-        processor = request.data['processor'].upper()
+        # processor = request.data['processor'].upper()
         brand = request.data['brand'].upper()
+        screen_resolution = request.data['screen_resolution'].upper()
+        processor_brand = request.data['processor_brand'].upper()
+        processor_series = request.data['processor_series'].upper()
+        processor_model = request.data['processor_model'].upper()
+        cpu_cores = request.data['cpu_cores']
+        weight = request.data['weight']
+
+        full_processor_model = " ".join([processor_brand,processor_series,processor_model])
 
         # Excel file with all dataset values
         excel_file = 'files/marketplaces_clean.xlsx'
@@ -51,16 +59,36 @@ class LaptopAPIView(APIView):
         # We used label encoder for transforming our string values into integer
         label_encoder = preprocessing.LabelEncoder()
         p_brand = df['brand']
-        p_status = df['full_processor_model']
-        df['brand'] = label_encoder.fit_transform(df['brand'])
-        df['full_processor_model'] = label_encoder.fit_transform(df['full_processor_model'])
+        p_processor_brand = df['processor_brand']
+        p_processor_model = df['processor_model']
+        p_processor_series = df['processor_series']
+        p_screen_resolution = df['screen_resolution']
+        p_cpu_cores = df['CPU Cores']
+        p_full_processor_model = df['full_processor_model']
 
+
+        df['full_processor_model'] = label_encoder.fit_transform(df['full_processor_model']) 
+        df['brand'] = label_encoder.fit_transform(df['brand'])
+        df['processor_brand'] = label_encoder.fit_transform(df['processor_brand'])
+        df['processor_model'] = label_encoder.fit_transform(df['processor_model'])
+        df['processor_series'] = label_encoder.fit_transform(df['processor_series'])
+        df['screen_resolution'] = label_encoder.fit_transform(df['screen_resolution'])
+        df['CPU Cores'] = label_encoder.fit_transform(df['CPU Cores'])
+
+        
         brand_v = dict(zip(list(p_brand),df['brand'].to_list()))
-        processor_v = dict(zip(list(p_status),df['full_processor_model'].to_list()))
+        processor_brand_v = dict(zip(list(p_processor_brand),df['processor_brand'].to_list()))
+        processor_series_v = dict(zip(list(p_processor_series),df['processor_series'].to_list()))
+        processor_model_v = dict(zip(list(p_processor_model),df['processor_model'].to_list()))
+        screen_resolution_v = dict(zip(list(p_screen_resolution),df['screen_resolution'].to_list()))
+        cpu_cores_v = dict(zip(list(p_cpu_cores),df['CPU Cores'].to_list()))
+        full_processor_model_v = dict(zip(list(p_full_processor_model),df['full_processor_model'].to_list()))
+
 
         # Taking our values and give to the trained model in pickle format, then getting the result laptop price.
-        model = pd.read_pickle(get_full_path("files/random_full_dataset.pickle"))
-        result = model.predict([[brand_v[brand],display,ssd,ram,processor_v[processor]]])
+        model = pd.read_pickle(get_full_path("files/diploma_xgboost.pickle"))
+        result = model.predict([[display,ssd, ram,full_processor_model_v[full_processor_model],screen_resolution_v[screen_resolution],processor_model_v[processor_model], processor_series_v[processor_series]
+                                 ,processor_brand_v[processor_brand],brand_v[brand],weight,cpu_cores_v[cpu_cores],processor_series_v[processor_series]]])
 
         # And finally give result as response
         return Response({'laptop_price':int(result[0])})
