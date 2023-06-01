@@ -43,7 +43,7 @@ class LaptopAPIView(APIView):
         display = request.data['display']
         # processor = request.data['processor'].upper()
         brand = request.data['brand'].upper()
-        screen_resolution = request.data['screen_resolution'].upper()
+        screen_resolution = request.data['screen_resolution'].lower()
         processor_brand = request.data['processor_brand'].upper()
         processor_series = request.data['processor_series'].upper()
         processor_model = request.data['processor_model'].upper()
